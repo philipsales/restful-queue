@@ -2,3 +2,4 @@
 
 resthooks_env
 resthooks_server/rest_api/settings
+!resthooks_server/rest_api/settings/template_conf.py
