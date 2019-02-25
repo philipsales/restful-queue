@@ -1,0 +1,112 @@
+swagger: "2.0"
+info:
+  description: RESTFUL API with abstracted RabbitMQ 
+  version: "1.0.0"
+  title: RESTHooks
+consumes:
+  - application/json
+produces:
+  - application/json
+basePath: /amqp
+tags:
+- name: "pet"
+  description: "Everything about your Pets"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+- name: "store"
+  description: "Access to Petstore orders"
+- name: "user"
+  description: "Operations about user"
+  externalDocs:
+    description: "Find out more about our store"
+    url: "http://swagger.io"
+tags:
+- name: "Order"
+  description: "OpenCart to Dispergo"
+- name: "Product"
+  description: "OpenCart to Dispergo"
+schemes:
+- "https"
+- "http"
+
+paths:
+  /order:
+    post:
+      operationId: controllers.order.create
+      tags:
+        - Order 
+      summary: Queue orders
+      description: Create a new orders queue 
+      parameters:
+        - name: item 
+          in: body
+          description: Orders to queue 
+          required: True
+          schema:
+            $ref: "#/definitions/Orders"
+      responses:
+        201:
+          description: Successfully queued orders 
+
+  /product:
+    post:
+      operationId: controllers.product.create
+      tags:
+        - Product 
+      summary: Queue product 
+      description: Create a new product queue 
+      parameters:
+        - name: product 
+          in: body
+          description: Product to queue 
+          required: True
+          schema:
+            $ref: "#/definitions/Product"
+      responses:
+        201:
+          description: Successfully queued product 
+
+definitions:
+  Orders:
+    type: "object"
+    properties:
+      order_id:
+        type: "string"
+        description: "order id"
+      order_date:
+        type: "string"
+        format: "date-time"
+        description: "order date"
+      item:
+        type: "array"
+        items:
+          $ref: "#/definitions/Item"
+
+  Item:
+    type: object 
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+        description: item id 
+      name:
+        type: string
+        description: item name 
+      quantity:
+        type: string
+        description: item name 
+  
+  Product:
+    type: object 
+    properties:
+      name:
+        type: string
+        description: product name 
+      description:
+        type: string
+        description: product description 
+      price:
+        type: number 
+        description: product price
+

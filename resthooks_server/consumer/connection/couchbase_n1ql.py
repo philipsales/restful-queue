@@ -9,7 +9,7 @@ from couchbase.bucket import Bucket
 from couchbase.n1ql import N1QLQuery, N1QLError
 from couchbase.exceptions import CouchbaseTransientError, CouchbaseError, CouchbaseNetworkError, NotFoundError
 
-from settings.base_conf import couchbase_config
+from connection.settings.base_conf import couchbase_config
 
 import logging
 logger = logging.getLogger("couchbase.n1q1")
@@ -27,9 +27,9 @@ PROTOCOL = conn['PROTOCOL']
 PORT = conn['PORT']
 
 
-def couchbase_get():
+def couchbase_get(data):
     try:
-        statement = _set_statement()
+        statement = _set_statement(data)
         logger.info(statement)
         
     except FileNotFoundError:
@@ -41,12 +41,18 @@ def couchbase_get():
     #res = _insert_document(statement)
     #return res
 
-def _set_statement(**kwargs):
+def _set_statement(data):
+    
+    _data_string = eval(data.decode('utf8'))
+    _data_obj = json.loads(_data_string)
+    _body = str(_data_obj['body'])
+    _type = str(_data_obj['type']) 
+    
     statement = ("INSERT INTO " + BUCKET + " (KEY, VALUE) "
-                 + "VALUES ( '_opencart:order:" + str(uuid.uuid4()) + "',"
-                 + " { 'id' : '01' }) RETURNING *;")
+                + "VALUES ( 'opencart:" + _type + ":" + str(uuid.uuid4()) + "',"
+                + _body + ") RETURNING *;")
 
-    #statement = ("SELECT * from `awhcurisdb_local` awh") 
+    print(statement)
     return statement 
 
 def _authenticate():
@@ -57,7 +63,6 @@ def _authenticate():
     return bucket
 
 def _get_all(statement): 
-    print(statement)
     try:
         #bucket = _authenticate()
         bucket = Bucket(URL)

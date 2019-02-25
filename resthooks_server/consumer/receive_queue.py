@@ -3,7 +3,7 @@ import pika
 import sys
 import json
 import time
-import couchbase_n1ql as n1ql
+import connection.couchbase_n1ql as n1ql
 
 _ip_address = 'localhost'
 _exchange_name = 'couchbase_upsert'
@@ -29,12 +29,9 @@ print(' [*] Waiting.')
 
 def callback(ch, method, properties, body):
     print(" [x] routing_key: %r, body:%r" % (method.routing_key, body))
-    #_body_loads = json.loads(_body)
-    time.sleep(5)
-    n1ql.couchbase_get()
-
-    #print(json.dumps(_body_loads))
-    #print(' [*] Done.')
+    time.sleep(2)
+    
+    n1ql.couchbase_get(body)
     ch.basic_qos(prefetch_count=1)
 
 

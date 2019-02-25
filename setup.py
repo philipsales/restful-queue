@@ -27,7 +27,7 @@ setup(
     package_data={'': ['resthooks_server/swagger.yaml']},
     include_package_data=True,
     entry_points={
-        'console_scripts': ['resthooks_server=resthooks_server.__main__:main']},
+        'console_scripts': ['resthooks_server=resthooks_server.__init__']},
     long_description="""\
     This is the swagger file that goes with our server code
     """
