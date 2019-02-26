@@ -9,7 +9,7 @@ Tested on the following
 | Couchbase    | 4.5.1    |
 | RabbitMQ     | 3.7.12   |
 
-## Getting started
+## Getting started 
 1. Create Python virtualenv
     ```bash
     cd producer
@@ -44,7 +44,18 @@ Tested on the following
 
 1. Try out order POST
 
-## Deployment
+## Deployment with docker
+
+1. To run the server on a Docker container, please execute the following from the root directory:
+
+```bash
+# building the image
+docker build -t resthooks_server.
+
+# starting up a container
+docker run -p 8080:8080 resthooks_server 
+```
+
 
 ## Built With
 * [Flask-Rest](https://flask-restful.readthedocs.io)
