@@ -1,0 +1,43 @@
+swagger: "2.0"
+info:
+  description: RESTFUL API wrapper for OpenEMPI 
+  version: "1.0.0"
+  title: Patient Master Index API 
+consumes:
+  - application/json
+produces:
+  - application/json
+basePath: /api
+tags:
+- name: "Person"
+  description: "search person by id"
+schemes:
+- "https"
+- "http"
+
+paths:
+  /findPersonById:
+    post:
+      operationId: controllers.person.findPersonById
+      tags:
+        - Person 
+      summary: Queue orders
+      description: Create a new orders queue 
+      parameters:
+        - name: item 
+          in: body
+          description: Orders to queue 
+          required: True
+          schema:
+            $ref: "#/definitions/PersonId"
+      responses:
+        200:
+          description: OK
+
+definitions:
+  PersonId:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        description: "person id"
