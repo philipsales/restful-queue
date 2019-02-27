@@ -6,6 +6,12 @@ import json
 
 import connections.pmi_requests as pmi
 
+def addPerson(item):
+    pass
+
+def findPersonByAttributes(item):
+    pass
+
 def findPersonById(item):
     _name = item.get("id", None)
     _type = "pmi"

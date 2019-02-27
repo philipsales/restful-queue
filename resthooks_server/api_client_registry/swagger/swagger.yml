@@ -10,7 +10,7 @@ produces:
 basePath: /api
 tags:
 - name: "Person"
-  description: "search person by id"
+  description: "Person entity"
 schemes:
 - "https"
 - "http"
@@ -19,6 +19,42 @@ paths:
   /findPersonById:
     post:
       operationId: controllers.person.findPersonById
+      tags:
+        - Person 
+      summary: Queue orders
+      description: Create a new orders queue 
+      parameters:
+        - name: item 
+          in: body
+          description: Orders to queue 
+          required: True
+          schema:
+            $ref: "#/definitions/PersonId"
+      responses:
+        200:
+          description: OK
+
+  /findPersonByAttributes:
+    post:
+      operationId: controllers.person.findPersonByAttributes
+      tags:
+        - Person 
+      summary: Queue orders
+      description: Create a new orders queue 
+      parameters:
+        - name: item 
+          in: body
+          description: Orders to queue 
+          required: True
+          schema:
+            $ref: "#/definitions/PersonId"
+      responses:
+        200:
+          description: OK
+
+  /addPerson:
+    put:
+      operationId: controllers.person.addPerson
       tags:
         - Person 
       summary: Queue orders
