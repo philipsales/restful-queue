@@ -48,6 +48,8 @@ paths:
       responses:
         201:
           description: Successfully queued orders 
+        500:
+          description: Connection to failed
 
   /product:
     post:
