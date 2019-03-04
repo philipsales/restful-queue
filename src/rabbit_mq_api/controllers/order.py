@@ -5,7 +5,7 @@ from datetime import datetime
 from flask import make_response, abort
 import json
 
-import producer.send_queue as rabbitmq 
+import rabbit_mq_producer.send_queue as rabbitmq 
 
 def create(item):
     _name = item.get("order_id", None)
