@@ -1,7 +1,8 @@
 #!/bin/bash
 
-ROOT_SRC='~/src'
-APP_FOLDER='resthooks_server/rabbit_mq_api'
+ROOT_SRC='$(pwd)'
+SRC_FOLDER="$ROOT_SRC/src"
+APP_FOLDER="$SRC_FOLDER/rabbit_mq_api"
 
 ## Getting started 
 # Python       | 3.6.2    |
