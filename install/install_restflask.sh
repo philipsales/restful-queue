@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROOT_SRC='$(pwd)'
+ROOT_SRC="$(pwd)"
 SRC_FOLDER="$ROOT_SRC/src"
 APP_FOLDER="$SRC_FOLDER/rabbit_mq_api"
 
@@ -13,10 +13,10 @@ mkdir ~/src
 
 #Create Python virtualenv
 cd $ROOT_SRC
-virtualenv --python=python3.6 python_env 
+virtualenv --python=python3.6 $ROOT_SRC/python_env 
 
 #Activate virtualenv
-source $ROOT_SRC/python_venv/bin/activate
+source $ROOT_SRC/python_env/bin/activate
 
 #Install python dependenices 
 pip install requirements.txt
