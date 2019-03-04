@@ -13,12 +13,14 @@ Tested on the following
 1. Create Python virtualenv
     ```bash
     cd producer
-    virtualenv --python=<$PATH_TO_PYTHON3.6> resthooks_env/
+    virtualenv --python=<$PATH_TO_PYTHON3.6> src_venv/
     ```
+
 1. Activate virtualenv
     ```bash
-    source resthooks_env/bin/activate
+    source src_venv/bin/activate
     ```
+
 1. Install python dependenices 
     ```bash
     pip install requirements.txt
@@ -44,28 +46,83 @@ Tested on the following
 
 1. Try out order POST
 
-## Deployment with docker
+# Deployment 
+Tested on the following
+
+| Dependencies | Versions |
+| ------------ | -------- |
+| Ubuntu       | 16.04LTS |
+
+## Install Docker Repository
+1. Installing Repository 
+    ```bash
+    sudo apt-get update
+    ```
+
+1. Installing Packages 
+    ```bash
+    sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+    ```
+
+1. Add Docker’s official GPG key:
+    ```bash
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    ```
+
+1. Verify fingerprints:
+    ```bash
+    sudo apt-key fingerprint 0EBFCD88
+    ```
+
+1. Use the following command to set up the stable repository
+    ```bash
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    ```
+
+## Install Docker-CE 
+1. Update apt 
+    ```bash
+    sudo apt-get update
+    ```
+
+1. Install the latest version of Docker CE 
+    ```bash
+    sudo apt-get install docker-ce docker-ce-cli containerd.io 
+    ```
+
+## Install Docker 
+1. Installing Docker Compose
+    1.2. sudo apt-get install docker-compose
+
+## Run using docker
 
 1. To run the server on a Docker container, please execute the following from the root directory:
+    ```bash
+    # building the image
+    docker build -t resthooks_server.
 
-```bash
-# building the image
-docker build -t resthooks_server.
-
-# starting up a container
-docker run -p 8080:8080 resthooks_server 
-```
-
+    # starting up a container
+    docker run -p 8080:8080 resthooks_server 
+    ```
 
 ## Built With
 * [Flask-Rest](https://flask-restful.readthedocs.io)
 
 ## Contributing
+
 ## Versioning 
+
 ## Authors
 * **Philip Sales** - *adopted work*
+
 ## License
 This project is licensed under the Creative Commons- see the Types of [Licenses](https://opensource.org/licenses/alphabetical) 
+
 ## Acknowledgments
 * [Flask-Rest](https://flask-restful.readthedocs.io)
 
