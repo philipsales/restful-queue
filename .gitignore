@@ -3,6 +3,7 @@
 
 # Virtual env
 resthooks_env
+python_venv
 
 # Credentials 
 resthooks_server/consumer/connection/settings/couchbase_conf.py

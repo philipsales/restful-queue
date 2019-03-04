@@ -12,11 +12,12 @@ Tested on the following
 ## Getting started 
 1. Create Python virtualenv
     ```bash
-    cd producer
-    virtualenv --python=<$PATH_TO_PYTHON3.6> src_venv/
+    cd ~ 
+    virtualenv --python=python3.6 python_env 
     ```
 1. Activate virtualenv
     ```bash
+    cd ~ 
     source src_venv/bin/activate
     ```
 1. Install python dependenices 
