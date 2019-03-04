@@ -9,3 +9,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+#TODO:
+#create dynamic IP thru config

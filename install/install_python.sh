@@ -1,25 +1,20 @@
 #!/bin/bash
 
-## Getting started 
-# Python       | 3.6.x    |
-
-# install curl , python, python-virtualenv
 sudo apt-get -y update 
-sudo apt-get install -y software-properties-common curl 
-#sudo add-apt-repository ppa:deadsnakes/ppa 
-sudo add-apt-repository -y ppa:jonathonf/python-3.6
-sudo apt-get -y update 
-sudo apt-get install -y python3.6 
-sudo apt-get install -y python3.6-venv
 
+#install C compiler
+sudo apt-get install -y build-essential
+sudo apt-get install -y zlib1g-dev
+sudo apt-get install -y libssl-dev
 
-#install python venv
-sudo apt-get install -y python-virtualenv
+wget http://www.python.org/ftp/python/3.6.2/Python-3.6.2.tgz
+tar xzvf Python-3.6.2.tgz
+cd Python-3.6.2/
+./configure
+#./configure --enable-optimizations
+make
+sudo make install
 
-#root directory
-#cd ~/
-
-# add permission to virtual_env to current user 
-#usermod -aG `id -un` python_venv
-
-
+#install python
+sudo apt install -y python-pip
+sudo pip install virtualenv

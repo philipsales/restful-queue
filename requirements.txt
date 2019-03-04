@@ -13,6 +13,7 @@ Jinja2==2.10
 jsonschema==2.6.0
 MarkupSafe==1.1.0
 openapi-spec-validator==0.2.4
+pika==0.13.0
 pytz==2018.9
 PyYAML==3.13
 requests==2.21.0
