@@ -1,12 +1,12 @@
 #!/bin/bash
 
-ROOT_SRC="$(pwd)"
-SRC_FOLDER="$ROOT_SRC/src"
-APP_FOLDER="$SRC_FOLDER/rabbit_mq_api"
-
-## Getting started 
+## Tested on 
 # Python       | 3.6.2    |
 # Virtualenv   | 15.1.0   |
+
+ROOT_SRC="$(pwd)"
+SRC_FOLDER="$ROOT_SRC/src"
+APP_FOLDER="$SRC_FOLDER/rabbit_mq_consumer"
 
 #create root src 
 mkdir ~/src
@@ -24,9 +24,11 @@ pip install -r requirements.txt
 
 ## Running the Basic 
 cd $APP_FOLDER
-python app.py 
+python receive_queue.py 
     
 #Go swagger url
 #http://localhost:5000/basepath/ui/
+
+#TODO: make settings config dynamic
 
 
