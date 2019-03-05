@@ -2,9 +2,6 @@ import sys
 import json
 import pika
 
-from rabbitmq_producer.configuration.base_conf import rabbitmq_config
-#from configuration.base_conf import couchbase_config 
-
 
 class SendQueue(object):
 
@@ -17,17 +14,18 @@ class SendQueue(object):
         _credentials = pika.PlainCredentials("guest", "guest")
         #_ip_address = '172.104.54.251'
         _ip_address = 'localhost'
-        _exchange_name = 'couchbase_upsert'
+        _exchange_name = 'amqp.topic.product-order'
         _exchange_type = 'topic'
 
-        connection = pika.BlockingConnection(pika.ConnectionParameters(host=_ip_address,socket_timeout=15, credentials=_credentials))
-        #connection = pika.BlockingConnection(pika.ConnectionParameters(host=_ip_address))
+        #connection = pika.BlockingConnection(pika.ConnectionParameters(host=_ip_address,socket_timeout=15, credentials=_credentials))
+        connection = pika.BlockingConnection(pika.ConnectionParameters(host=_ip_address))
         channel = connection.channel()
 
         channel.exchange_declare(exchange=_exchange_name,
                                 exchange_type=_exchange_type)
 
-        _routing_key = 'anonymous.info'
+        #_routing_key = 'anonymous.info'
+        _routing_key = self._type
         _message =  '{ "body" : ' + self._data + ', ' + ' "type" : "' + self._type + '" }'
         _body  = json.dumps(_message)
 

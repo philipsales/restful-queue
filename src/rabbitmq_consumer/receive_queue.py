@@ -4,18 +4,16 @@ import sys
 import json
 import time
 import connection.couchbase_n1ql as n1ql
-import configuration.base_conf
 
-#_credentials = pika.PlainCredentials('RabbitMQAdmin', 'RabbitAdm(1)n@AWH')
-_credentials = pika.PlainCredentials('guest', 'guest')
+_credentials = pika.PlainCredentials('RabbitMQAdmin', 'RabbitAdm(1)n@AWH')
 _ip_address = 'localhost'
-#rabbitMQ server
 #_ip_address = '172.104.54.251'
-_exchange_name = 'couchbase_upsert'
+#_ip_address = '172.104.171.229'
+_exchange_name = 'amqp.topic.product-order'
 _exchange_type = 'topic'
 
-connection = pika.BlockingConnection(pika.ConnectionParameters(host=_ip_address,socket_timeout=15, credentials=_credentials))
-#connection = pika.BlockingConnection(pika.ConnectionParameters(host=_ip_address))
+#connection = pika.BlockingConnection(pika.ConnectionParameters(host=_ip_address,socket_timeout=15, credentials=_credentials))
+connection = pika.BlockingConnection(pika.ConnectionParameters(host=_ip_address))
 channel = connection.channel()
 
 channel.exchange_declare(exchange=_exchange_name,
@@ -24,7 +22,8 @@ channel.exchange_declare(exchange=_exchange_name,
 result = channel.queue_declare(exclusive=True, durable=True)
 queue_name = result.method.queue
 
-binding_keys = ['*.info', 'warning']
+#binding_keys = ['*.info', 'warning']
+binding_keys = ['product', 'order']
 
 for binding_key in binding_keys:
     channel.queue_bind(exchange=_exchange_name,
