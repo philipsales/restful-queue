@@ -5,9 +5,13 @@ import json
 import time
 import connection.couchbase_n1ql as n1ql
 
-_ip_address = 'localhost'
+_credentials = pika.PlainCredentials('RabbitMQAdmin', 'RabbitAdm(1)n@AWH')
+#_ip_address = 'localhost'
+_ip_address = '172.104.54.251'
+#_ip_address = '172.104.171.229'
 _exchange_name = 'couchbase_upsert'
 _exchange_type = 'topic'
+
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(host=_ip_address))
 channel = connection.channel()
