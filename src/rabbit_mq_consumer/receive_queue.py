@@ -12,8 +12,8 @@ _ip_address = '172.104.54.251'
 _exchange_name = 'couchbase_upsert'
 _exchange_type = 'topic'
 
-
-connection = pika.BlockingConnection(pika.ConnectionParameters(host=_ip_address))
+connection = pika.BlockingConnection(pika.ConnectionParameters(host=_ip_address,socket_timeout=15, credentials=_credentials))
+#connection = pika.BlockingConnection(pika.ConnectionParameters(host=_ip_address))
 channel = connection.channel()
 
 channel.exchange_declare(exchange=_exchange_name,
