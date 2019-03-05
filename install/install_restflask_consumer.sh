@@ -6,7 +6,7 @@
 
 ROOT_SRC="$(pwd)"
 SRC_FOLDER="$ROOT_SRC/src"
-APP_FOLDER="$SRC_FOLDER/rabbit_mq_consumer"
+APP_FOLDER="$SRC_FOLDER/rabbitmq_consumer"
 
 #create root src 
 mkdir ~/src
