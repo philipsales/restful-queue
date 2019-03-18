@@ -9,7 +9,7 @@ CouchbaseENV = "development"
 
 CouchbaseConfig = {
     'development': {
-        'BUCKET': 'awhcurisdb_local',
+        'BUCKET': 'awhdispergodb',
         'USERNAME': 'adminadmin',
         'PASSWORD': 'adminadmin',
         'PROTOCOL': 'http',

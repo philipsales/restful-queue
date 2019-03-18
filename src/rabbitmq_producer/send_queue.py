@@ -9,12 +9,15 @@ class SendQueue(object):
 
         self._data = data
         self._type = msg_type 
+        print('messeage_type')
+        print(msg_type)
+        
 
         #_credentials = pika.PlainCredentials("RabbitMQAdmin", "RabbitAdm(1)n@AWH")
         _credentials = pika.PlainCredentials("guest", "guest")
         #_ip_address = '172.104.54.251'
         _ip_address = 'localhost'
-        _exchange_name = 'amqp.topic.product-order'
+        _exchange_name = 'amqp.topic.product-orders'
         _exchange_type = 'topic'
 
         #connection = pika.BlockingConnection(pika.ConnectionParameters(host=_ip_address,socket_timeout=15, credentials=_credentials))
@@ -22,7 +25,8 @@ class SendQueue(object):
         channel = connection.channel()
 
         channel.exchange_declare(exchange=_exchange_name,
-                                exchange_type=_exchange_type)
+                                exchange_type=_exchange_type,
+                                durable=True)
 
         #_routing_key = 'anonymous.info'
         _routing_key = self._type
@@ -36,3 +40,7 @@ class SendQueue(object):
         print(' [*] sent. %r: %r' %(_routing_key, _message))
 
         connection.close()
+
+
+if __name__ == '__main__':
+    SendQueue('','')
