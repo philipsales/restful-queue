@@ -80,7 +80,7 @@ def _get_all(statement):
         for row in bucket.n1ql_query(query):
             results.append(row)
             logger.info('ROW:', row)
-        logger.info('RESULTS:', results)
+        logger.info(results)
         return 'ok'
 
     except (CouchbaseError, CouchbaseTransientError, CouchbaseNetworkError) as err: 

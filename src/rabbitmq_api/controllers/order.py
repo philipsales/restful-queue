@@ -4,8 +4,10 @@ sys.path.append('..')
 from datetime import datetime
 from flask import make_response, abort
 import json
-
 import rabbitmq_producer.send_queue as rabbitmq 
+
+import logs.logging_conf, logging
+logger = logging.getLogger("order.py")
 
 def create(item):
     _name = item.get("order_id", None)

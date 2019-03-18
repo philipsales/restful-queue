@@ -1,8 +1,9 @@
 import flask 
 import connexion
-
+import logs.logging_conf, logging
 from configuration.base_conf import api_config
 
+logger = logging.getLogger("app.py")
 conn = api_config.ApiConfig[api_config.ApiENV]
 
 def main():

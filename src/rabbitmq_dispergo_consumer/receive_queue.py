@@ -20,34 +20,37 @@ _exchange_type = 'topic'
 connection = pika.BlockingConnection(pika.ConnectionParameters(host=_ip_address))
 channel = connection.channel()
 
-channel.exchange_declare(exchange=_exchange_name, exchange_type=_exchange_type, durable=True) 
+channel.exchange_declare(exchange=_exchange_name, 
+                         exchange_type=_exchange_type, 
+                         passive=False,
+                         durable=True,
+                         auto_delete=False) 
 #for dynamic queue_name
-result = channel.queue_declare(exclusive=True, durable=True)
+#result = channel.queue_declare(exclusive=True, durable=True)
 
-#for dynamic queue_name
-#result = channel.queue_declare(queue='opencart_events', durable=True)
+#for static queue_name
+result = channel.queue_declare(queue='opencart_events', durable=True)
 
-logger.info('[QUEUE]:', result)
 queue_name = result.method.queue
 
-#binding_keys = ['*.info', 'warning']
 binding_keys = ['order']
 
 for binding_key in binding_keys:
     channel.queue_bind(exchange=_exchange_name,
-                        queue=queue_name,
-                        routing_key=binding_key)
-
-logger.info('[*] Waiting.')
+                       queue=queue_name,
+                       routing_key=binding_key)
 
 def callback(ch, method, properties, body):
     logger.info("[x] routing_key: %r, body:%r" % (method.routing_key, body))
-    time.sleep(2)
-    
+    #time.sleep(2)
     result = n1ql.couchbase_get(body)
-    logger.info(result)
-    ch.basic_qos(prefetch_count=1)
+    logger.info('---CALLBACK----')
+    ch.basic_qos(prefetch_count=2)
 
 
-channel.basic_consume(callback, queue=queue_name, no_ack=False) 
-channel.start_consuming()
+channel.basic_consume(callback, queue=queue_name, no_ack=True) 
+
+try:
+    channel.start_consuming()
+finally:
+    connection.close()

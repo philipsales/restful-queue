@@ -6,6 +6,9 @@ from flask import make_response, abort
 import json
 
 import rabbitmq_producer.send_queue as rabbitmq 
+import logs.logging_conf, logging
+
+logger = logging.getLogger("product.py")
 
 def create(product):
     _name = product.get("name", None)
