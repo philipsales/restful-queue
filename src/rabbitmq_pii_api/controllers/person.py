@@ -4,7 +4,7 @@ from datetime import datetime
 from flask import make_response, abort
 import json
 
-import configuration.pmi_requests as pmi
+import configuration.pmi_conf as pmi
 
 def addPerson(item):
     pass

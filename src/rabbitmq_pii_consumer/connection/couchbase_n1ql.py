@@ -28,22 +28,14 @@ PORT = conn['PORT']
 def couchbase_get(data):
     try:
         statement = _set_statement(data)
+        logger.info(statement)
         
     except FileNotFoundError:
         logger.info(statement)
 
     res = _get_all(statement)
-
-
-    logger.info('----COUCHBASE GET RESPONSE-----')
     #return _dict2json(res, True)
     logger.info(res)
-
-    results = []
-    for row in res:
-        results.append(row)
-    logger.info(results)
-
     return res
     #res = _insert_document(statement)
     #return res
@@ -54,12 +46,9 @@ def _set_statement(data):
     _body = str(_data_obj['body'])
     _type = str(_data_obj['type']) 
     
-    '''
     statement = ("INSERT INTO " + BUCKET + " (KEY, VALUE) "
                 + "VALUES ( 'opencart:" + _type + ":" + str(uuid.uuid4()) + "',"
                 + _body + ") RETURNING *;")
-    '''
-    statement = ("SELECT * FROM  " + BUCKET + " limit 1")
 
     logger.info(statement)
     return statement 
@@ -79,17 +68,15 @@ def _get_all(statement):
         bucket.n1ql_timeout = TIMEOUT
         query = N1QLQuery(statement)
         query.timeout = TIMEOUT 
-
-        logger.info(query)
         results = bucket.n1ql_query(query)
 
-        '''
+
         results = []
         for row in bucket.n1ql_query(query):
             results.append(row)
+            logger.info('ROW:', row)
+        logger.info(results)
         return 'ok'
-        '''
-        return results
 
     except (CouchbaseError, CouchbaseTransientError, CouchbaseNetworkError) as err: 
         logger.error(err)

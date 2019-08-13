@@ -1,7 +1,6 @@
 
 #SERVER Configuration
-#CouchbaseENV = "development"
-CouchbaseENV = "uat"
+CouchbaseENV = "development"
 #'PORT': '8091' for Web UI  
 #'PORT': '8093' for n1ql
 #'PORT': '4984' for public sync 
@@ -20,15 +19,15 @@ CouchbaseConfig = {
         'PORT': '8093',
         'TIMEOUT': 72000
     },
-    'uat': {
+    'production': {
         'BUCKET': 'awhdispergodb',
         'USERNAME': 'superman',
         'PASSWORD': 'kryptonite',
         'PROTOCOL': 'http',
         'SCHEME': 'couchbase',
-        'IP': '139.162.49.49',
-        'HOST': 'couchbase://139.162.49.49/',
-        'PORT': '8091',
+        'IP': '172.104.171.229',
+        'HOST': 'couchbase://172.104.171.229/',
+        'PORT': '8093',
         'TIMEOUT': 720000
     },
 }

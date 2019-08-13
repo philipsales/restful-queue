@@ -9,11 +9,10 @@ logger = logging.getLogger("send_queue.py")
 class SendQueue(object):
 
     EXCHANGE_TYPE = 'topic'
-    EXCHANGE_NAME = 'amqp.topic.product-orders'
+    EXCHANGE_NAME = 'amqp.topic.pii-requests'
     PUBLISHING_INTERVAL = 1
 
     def __init__(self, data, msg_type):
-
 
         self._data = data
         self._type = msg_type 
@@ -21,11 +20,11 @@ class SendQueue(object):
         logger.info('messeage_type')
         logger.info(msg_type)
 
-        _credentials = pika.PlainCredentials("RabbitMQAdmin", "RabbitAdm(1)n@AWH")
-        #_credentials = pika.PlainCredentials("guest", "guest")
-        _ip_address = '172.104.54.251'
-        #_ip_address = 'localhost'
-        _exchange_name = 'amqp.topic.product-orders'
+        #_credentials = pika.PlainCredentials("RabbitMQAdmin", "RabbitAdm(1)n@AWH")
+        _credentials = pika.PlainCredentials("guest", "guest")
+        #_ip_address = '172.104.54.251'
+        _ip_address = 'localhost'
+        _exchange_name = 'amqp.topic.pii-requests'
         _exchange_type = 'topic'
 
         self._connection = None
@@ -48,7 +47,6 @@ class SendQueue(object):
                                 auto_delete=False)
 
         #_routing_key = 'anonymous.info'
-
         _routing_key = self._type
         _message =  '{ "body" : ' + self._data + ', ' + ' "type" : "' + self._type + '" }'
         _body  = json.dumps(_message)

@@ -45,7 +45,6 @@ def callback(ch, method, properties, body):
     #time.sleep(2)
     result = n1ql.couchbase_get(body)
     logger.info('---CALLBACK----')
-    
     ch.basic_qos(prefetch_count=2)
 
 

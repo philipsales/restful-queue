@@ -9,11 +9,11 @@ import logs.logging_conf, logging
 logger = logging.getLogger("receive_queue.py")
 
 
-_credentials = pika.PlainCredentials('RabbitMQAdmin', 'RabbitAdm(1)n@AWH')
+#_credentials = pika.PlainCredentials('RabbitMQAdmin', 'RabbitAdm(1)n@AWH')
+_credentials = pika.PlainCredentials('guest', 'guest')
 _ip_address = 'localhost'
 #_ip_address = '172.104.54.251'
-#_ip_address = '172.104.171.229'
-_exchange_name = 'amqp.topic.product-orders'
+_exchange_name = 'amqp.topic.pii-requests'
 _exchange_type = 'topic'
 
 #connection = pika.BlockingConnection(pika.ConnectionParameters(host=_ip_address,socket_timeout=15, credentials=_credentials))
@@ -28,8 +28,8 @@ channel.exchange_declare(exchange=_exchange_name,
 #for dynamic queue_name
 #result = channel.queue_declare(exclusive=True, durable=True)
 
-#for static queue_name
-result = channel.queue_declare(queue='opencart_events', durable=True)
+#for static queue_name only
+result = channel.queue_declare(queue='pii_events', durable=True)
 
 queue_name = result.method.queue
 
@@ -45,7 +45,6 @@ def callback(ch, method, properties, body):
     #time.sleep(2)
     result = n1ql.couchbase_get(body)
     logger.info('---CALLBACK----')
-    
     ch.basic_qos(prefetch_count=2)
 
 
